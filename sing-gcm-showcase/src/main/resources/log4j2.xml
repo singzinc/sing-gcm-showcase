@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+	<Properties>
+		<Property name="logRoot">C:/sing/showcase/logs/sing-spring</Property>
+	</Properties>
+	<Appenders>
+	    <Console name="console" target="SYSTEM_OUT">
+			<PatternLayout pattern="%-5p|%d{ABSOLUTE}| %c{1}:%L - %M - %m%n" />
+		</Console>
+		<!-- =========== controller config =========== -->
+		<RollingFile name="controllerFile" append="true" 
+					fileName="${logRoot}/controller.log"
+					filePattern="${logRoot}/controller-%d{yyyy-MM-dd}.log">
+			<PatternLayout pattern="%-5p|%d{ABSOLUTE}| %c{1}:%L - %M - %m%n" />
+			<Policies> 
+				<TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+				<SizeBasedTriggeringPolicy size="50MB" />
+			</Policies>
+			<!--  
+			<DefaultRolloverStrategy max="10" /> 
+			-->
+		</RollingFile>
+		
+		<!-- =========== DAO config =========== -->
+		<RollingFile name="daoFile" append="true" 
+					fileName="${logRoot}/dao.log"
+					filePattern="${logRoot}/dao-%d{yyyy-MM-dd}.log">
+			<PatternLayout pattern="%-5p|%d{ABSOLUTE}| %c{1}:%L - %M - %m%n" />
+			<Policies> 
+				<SizeBasedTriggeringPolicy size="50MB" />
+			</Policies>
+			<!--  
+			<DefaultRolloverStrategy max="10" /> 
+			-->
+		</RollingFile>
+		
+		<!-- =========== service config =========== -->
+		<RollingFile name="serviceFile" append="true" 
+					fileName="${logRoot}/service.log"
+					filePattern="${logRoot}/service-%d{yyyy-MM-dd}.log">
+			<PatternLayout pattern="%-5p|%d{ABSOLUTE}| %c{1}:%L - %M - %m%n" />
+			<Policies> 
+				<TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+				<SizeBasedTriggeringPolicy size="50MB" />
+			</Policies>
+			<!--  
+			<DefaultRolloverStrategy max="10" /> 
+			-->
+		</RollingFile>
+		
+		<!-- =========== util config =========== -->
+		<RollingFile name="utilFile" append="true" 
+					fileName="${logRoot}/util.log"
+					filePattern="${logRoot}/util-%d{yyyy-MM-dd}.log">
+			<PatternLayout pattern="%-5p|%d{ABSOLUTE}| %c{1}:%L - %M - %m%n" />
+			<Policies> 
+				<TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+				<SizeBasedTriggeringPolicy size="50MB" />
+			</Policies>
+			<!--  
+			<DefaultRolloverStrategy max="10" /> 
+			-->
+		</RollingFile>
+	</Appenders>
+	<Loggers>
+		<logger name="com.singplayground.controller" level="info">
+			<AppenderRef ref="controllerFile" />
+		</logger>
+		<logger name="com.singplayground.dao" level="info">
+			<AppenderRef ref="daoFile" />
+		</logger>
+		<logger name="com.singplayground.service" level="info">
+			<AppenderRef ref="serviceFile" />
+		</logger>
+		<logger name="com.singplayground.util" level="info">
+			<AppenderRef ref="utilFile" />
+		</logger>
+		<Root level="debug">
+			<AppenderRef ref="console" />
+		</Root>
+	</Loggers>
+</Configuration>
